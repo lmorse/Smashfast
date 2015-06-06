@@ -114,20 +114,36 @@ class Scene_3(Scene):
 class Scene_4(Scene):
 
     def enter(self):
-       print "Scene 4 description"
+        print 'She runs to the White House and up to the roof where a Pod Racer sits on the helipad.'
+        print 'She gets on and races towards Rock Candy Mountain. Ripley calls her and she sets the '
+        print 'IPhone on a safe hands free driving holder.'
+        print 'Ripley warns: "Be careful of the tunnel. Use the IPhone to locate me on the mountain."'
+        print 'Furiosa: "I can\'t it seems to be stuck on some stupid Candy Crush game!"'
+        print 'Ripley: "Don\'t touch it - I have a Sonic Screwdriver, that will fix it. Just keep moving"'
+        print 'the Alien is on your tail!  Furiosa approaches the base of the Rock Candy Mountain and see\'s'
+        print 'the tunnel. She looks back to see the Alien chasing her.'
+        print '\n'
+        print 'The Mountain is a towering formation of hard Rock Candy crystals with a tunnel at the base.'
+        print 'She gets off the Pod Racer but notices a Bazooka gun that she thinks will come in handy so'
+        print 'she takes it and proceeds into the tunnel.  The tunnel quickly splits into two paths.'
+        print 'The Blue crystal tunnel is covered in cheesy spider webs, being lactose intolerant and a'
+        print 'bit arachnophobic she hesitates. The Red Crystal tunnel seems clear so she proceeds.'
+        print 'Around the bend she hears a robotic voice saying "EXTERMINATE" and she is confronted by a Darlek.'
+        print "\n"
+        print "Choose: 'run' the other way, 'shoot' at the Darlek, 'iPhone' for help"
 
        action = raw_input("> ")
 
        if action == "option_a":
-           print "Option A description"
+           print "She runs the other way to the Blue Crystal tunnel."
            return 'finalscene'
 
        elif action == "option_b":
-           print "Option B description"
+           print "She shoots at the Darlek but all it shoots is Blow Pops, so it\'s useless."
            return 'death'
 
        elif action == "option_c":
-           print "Option C description"
+           print "She pulls out the IPhone to see if there is another path, but gets mesmerized by Candy Crush and gets exterminated."
            return 'death'
 
        else:
