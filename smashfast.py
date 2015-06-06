@@ -1,11 +1,28 @@
 from sys import exit
 from random import randint
+import os
+from sys import platform as _platform
+
+if _platform.lower() in ["linux", "linux2", "darwin"]:
+    os.system("clear")
+elif _platform.lower() in ["windows", "win32"]:
+    os.system("cls")
+else:
+    print "Unknown OS - Run at your own risk"
 
 class Scene(object):
 
     def enter(self):
-        print "This scene is not yet configured. Subclass it and implement enter()."
         exit(1)
+
+    def choose(self):
+        remarks = [
+                    "Seriously? Learn how to type...Try again!",
+                    "Try typing without your boxing gloves on...",
+                    "Sigh, I can tell we'll be at this all day. Try again!",
+                    "To err is human...but you're just an idiot. Try again!."
+                    ]
+        return remarks [randint(0, len(remarks)-1)]
 
 class Engine(object):
 
@@ -25,9 +42,9 @@ class Engine(object):
 class Death(Scene):
 
     quips = [
-        "Muwwah ha ha ha!  You die!!!  Ripley will be so disappointed!!!!",
+        "Mwuah ha ha ha!  You die!!!  Ripley will be so disappointed!!!!",
         "Not a good choice and you're way too slow!!!  RIP Furiosa!!!",
-        "Too bad, you die!  You will make a tasty treat Zombie Bunnies!!!",
+        "Too bad, you die!  You will make a tasty treat for Zombie Bunnies!!!",
         "Words can't describe your incompetence, so I'll just throw up and kill you!!!"
     ]
 
@@ -38,30 +55,31 @@ class Death(Scene):
 class Opening_Scene(Scene):
 
     def enter(self):
-        print "The Tardis is spinning out of control in the cosmos. It explodes"
-        print "unexpectedly ending our entire universe both real and imagined"
-        print "into one cosmic paradox."
+        print "The Tardis is spinning out of control in the cosmos."
+        print "It explodes unexpectedly ending our entire universe,"
+        print "both real and imagined, into one cosmic paradox."
         print "Ready for an adventure? Press ENTER to continue, or CRTL + C to"
         print "turn back now..."
         raw_input("> ")
         
         print "Like waking up from a dream we see Furiosa from Mad Max opening"
         print "up and standing to see the island of Jurassic Park for the first"
-        print "time.  Confused and fearful by the strange sounds and sights she"
-        print "is pulled to a long lost familiar ring of a free-standing NYC"
-        print "payphone. It's a little sticky and revolting, but she answers it"
-        print "anyway..."
+        print "time. Confused and fearful by the strange sounds and sights, she"
+        print "is pulled to a long lost familiar ring of a free-standing"
+        print "New York City payphone. It's a little sticky and revolting,"
+        print "but she answers it anyway..."
         print "\n"
-        print "\"Hello? \""
+        print "\"Hello?\""
         print "\n"
         print "The voice on the other end is authoritative and insistent."
-        print "\" You don't know me but my name is Ripley. You need to move"
+        print "\"You don't know me but my name is Ripley. You need to move"
         print "fast and collect as many weapons as possible. There is a very"
         print "nasty alien stalking you with acid for blood and a tail that"
         print "will slice you in half. Get to me as fast as you can, there is a"
-        print "thing called an iPhone on the ground next to you...it will help"
+        print "thing called an iPhone on the ground next to you... it will help"
         print "you, bring it to me. Look ahead, do you see a Rock Candy"
-        print "Mountain? I'm at the top, it is safe here! \""
+        print "Mountain? I'm at the top, it is safe here!\""
+        print "\n"
         return 'scene1'
 
 class Scene_1(Scene):
@@ -73,7 +91,7 @@ class Scene_1(Scene):
         print "quickly shifts to the sky, because from overhead a pterodactyl"
         print "approaches and she reaches into her backpack to find a shotgun."
         print "\n"
-        print "Choose: 'shoot', 'throw the iPhone' or 'run away'?"
+        print "Choose: 'shoot', 'throw' the iPhone, or 'run' away?"
 
         action = raw_input("> ")
         
@@ -83,56 +101,76 @@ class Scene_1(Scene):
             print "Looking closely at it, it's covered in blood and says"
             print "'Property of Segway Steve'. She shrugs and gets on the"
             print "segway and proceeds towards the forest."
+            print "\n"
             return 'scene2'
 
-        elif action == "throw the iPhone":
+        elif action == "throw":
             print "Furiosa winds up and hurls the iPhone at the pterodactyl."
             print "But it ends up being more of a easy lob in the dinosaur's"
-            print "general direction. The pterodactyl laughs and screeches: \""
-            print "ANDROID WILL PREVAIL!\" and eats Furiosa."
+            print "general direction. The pterodactyl laughs and screeches:"
+            print "\"ANDROID WILL PREVAIL!\" and eats Furiosa."
+            print "\n"
             return 'death'
 
-        elif action == "run away":
+        elif action == "run":
             print "Furiosa sprints away from the pterodactyl but only makes it"
             print "three steps before the giant ancient pterosaur swoops down"
             print "and gobbles her up."
+            print "\n"
             return 'death'
 
         else:
-            print "DOES NOT COMPUTE!"
+            print self.choose()
+            print "\n"
             return 'scene1'
 
 class Scene_2(Scene):
 
     def enter(self):
-        print "As she rolls on her segway to the Forest she meets a friend. A life size Gummy "
-        print "Bear peaks from around the tree and joins on her journey."  
-        print "They soon hear a rustling up ahead in the trees. The Gummy runs"
-        print "ahead thinking it's his friend. Furiosa rides to protect her"
-        print "friend and the two are surprised to see an Alien standing in"
-        print "front of them. The Alien jumps on the Gummy Bear and tries to eat it."
-        print "The alien gets stuck in the GOO of the Gummy Bear, giving Furiosa"
-        print "a chance to arm herself or run."
-        print "\n"
-        print "Choose: 'save' the Gummy Bear, 'shoot' the alien, 'drive' away on the segway" 
+        print "As she rolls on her segway to the Forest she meets a friend."
+        print "A life size Gummy Bear peaks from around the tree and joins"
+        print "on her journey." 
 
-        action = raw_input("> ")
-
-        if action == "drive":
-            print "She drives away on the segway."
-            return 'scene3'
-
-        elif action == "shoot":
-            print "She uses the shotgun and gets sprayed by acid."
-            return 'death'
-
-        elif action == "save":
-            print "She tries to save her friend and gets sliced in half by the Alien's tail."
-            return 'death'
+        easter_egg = raw_input("...")
+        if easter_egg == "touch his nose":
+            print "Furiosa reaches out and touches the Gummy Bear's nose."
+            print "The Gummy Bear turns into Freddy from Five Nights at Freddy's!"
+            print "He starts to shake and blows up, launching Furiosa up high."
+            print "She lands in the middle of cheesy spider web, miles away."
+            print "Luckily, she's miles closer to Rock Candy Mountain!"
+            print "\n"
+            return 'scene5'
 
         else:
-            print "DOES NOT COMPUTE!"
-            return 'scene2'
+            print "They soon hear a rustling up ahead in the trees."
+            print "The Gummy runs ahead thinking it's his friend. Furiosa rides"
+            print "to protect her friend and the two are surprised to see an Alien"
+            print "standing in front of them. The Alien jumps on the Gummy Bear"
+            print "and tries to eat it. The Alien gets stuck in the goo of the"
+            print "Gummy Bear, giving Furiosa a chance to make a decision."
+            print "\n"
+            print "Choose: 'save' the Gummy Bear, 'shoot' the alien, 'drive' away"
+            print "on the segway"
+
+            action = raw_input("> ")
+
+            if action == "drive":
+                print "She drives away on the segway."
+                return 'scene3'
+
+            elif action == "shoot":
+                print "She uses the shotgun and gets sprayed by acid."
+                return 'death'
+
+            elif action == "save":
+                print "She tries to save her friend and gets sliced in half by the"
+                print "Alien's tail."
+                return 'death'
+
+            else:
+                print self.choose()
+                print "\n"
+                return 'scene2'
 
 class Scene_3(Scene):
 
@@ -147,8 +185,8 @@ class Scene_3(Scene):
         print "monster coming up from under the ground. She reaches into the"
         print "backpack and finds a Nerf supersoaker filled with water."
         print "\n"
-        print "Choose: 'supersoaker' to spray the monster, 'shoot' to use the shotgun,"
-        print "'run' to run away"
+        print "Choose: 'supersoaker' to spray the monster, 'shoot' to use"
+        print "the shotgun, 'run' to run away"
 
         action = raw_input("> ")
 
@@ -165,47 +203,59 @@ class Scene_3(Scene):
             return 'death'
 
         else:
-            print "DOES NOT COMPUTE!"
+            print self.choose()
+            print "\n"
             return 'scene3'
 
 class Scene_4(Scene):
 
     def enter(self):
-        print 'She runs to the White House and up to the roof where a Pod Racer sits on the helipad.'
-        print 'She gets on and races towards Rock Candy Mountain. Ripley calls her and she sets the '
-        print 'IPhone on a safe hands free driving holder.'
-        print 'Ripley warns: "Be careful of the tunnel. Use the IPhone to locate me on the mountain."'
-        print 'Furiosa: "I can\'t it seems to be stuck on some stupid Candy Crush game!"'
-        print 'Ripley: "Don\'t touch it - I have a Sonic Screwdriver, that will fix it. Just keep moving"'
-        print 'the Alien is on your tail!  Furiosa approaches the base of the Rock Candy Mountain and see\'s'
-        print 'the tunnel. She looks back to see the Alien chasing her.'
-        print '\n'
-        print 'The Mountain is a towering formation of hard Rock Candy crystals with a tunnel at the base.'
-        print 'She gets off the Pod Racer but notices a Bazooka gun that she thinks will come in handy so'
-        print 'she takes it and proceeds into the tunnel.  The tunnel quickly splits into two paths.'
-        print 'The Blue crystal tunnel is covered in cheesy spider webs, being lactose intolerant and a'
-        print 'bit arachnophobic she hesitates. The Red Crystal tunnel seems clear so she proceeds.'
-        print 'Around the bend she hears a robotic voice saying "EXTERMINATE" and she is confronted by a Darlek.'
+        print "She runs to the White House and up to the roof where a Pod Racer"
+        print "sits on the helipad. She gets on and races towards Rock Candy"
+        print "Mountain. Ripley calls her and she sets the iPhone on a safe"
+        print "hands free driving holder. Ripley warns: \"Be careful of the"
+        print "tunnel. Use the iPhone to locate me on the mountain.\""
+        print "Furiosa: \"I can't it seems to be stuck on some stupid" 
+        print "Candy Crush game!\""
+        print "Ripley: \"Don't touch it - I have a Sonic Screwdriver, that"
+        print "will fix it. Just keep moving! The Alien is on your tail!\""
+        print "Furiosa approaches the base of the Rock Candy Mountain and sees"
+        print "the tunnel. She looks back to see the Alien chasing her."
         print "\n"
-        print "Choose: 'run' the other way, 'shoot' at the Darlek, 'iPhone' for help"
+        print "The Mountain is a towering formation of hard Rock Candy"
+        print "crystals with a tunnel at the base. She gets off the Pod Racer"
+        print "but notices a Bazooka gun that she thinks will come in handy,"
+        print "so she takes it and proceeds into the tunnel. The tunnel"
+        print "quickly splits into two paths. The Blue crystal tunnel is"
+        print "covered in cheesy spider webs, but being lactose intolerant and"
+        print "a bit arachnophobic, she hesitates. The Red Crystal tunnel"
+        print "seems clear so she proceeds. Around the bend she hears a"
+        print "robotic voice saying 'EXTERMINATE' and she is confronted"
+        print "by a Darlek."
+        print "\n"
+        print "Choose: 'run' the other way, 'shoot' at the Darlek, 'iPhone'"
+        print "for help"
 
-       action = raw_input("> ")
+        action = raw_input("> ")
 
-       if action == "run":
-           print "She runs the other way to the Blue Crystal tunnel."
-           return 'finalscene'
+        if action == "run":
+            print "She runs the other way to the Blue Crystal tunnel."
+            return 'finalscene'
 
-       elif action == "shoot":
-           print "She shoots at the Darlek but all it shoots is Blow Pops, so it\'s useless."
-           return 'death'
+        elif action == "shoot":
+            print "She shoots at the Darlek, but all it shoots is Blow Pops!"
+            print " It's useless..."
+            return 'death'
 
-       elif action == "iPhone":
-           print "She pulls out the IPhone to see if there is another path, but gets mesmerized by Candy Crush and gets exterminated."
-           return 'death'
+        elif action == "iPhone":
+            print "She pulls out the IPhone to see if there is another path,"
+            print "but gets mesmerized by Candy Crush and gets exterminated."
+            return 'death'
 
-       else:
-           print "DOES NOT COMPUTE!"
-           return 'scene4'
+        else:
+            print self.choose()
+            print "\n"
+            return 'scene4'
 
 class Scene_5(Scene):
 
@@ -236,12 +286,13 @@ class Scene_5(Scene):
 
         elif action == "play":
             print "Furiosa picks up the iPhone that has just sucked in the"
-            print "Alien and presses “Invite” to Ripley so that they can play."
+            print "Alien and presses 'Invite' to Ripley so that they can play."
             print "Both are sucked into the phone and die."
             return 'death'
 
         else:
-            print "DOES NOT COMPUTE!"
+            print self.choose()
+            print "\n"
             return 'scene5'
 
 class Final_Scene(Scene):
