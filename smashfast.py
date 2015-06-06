@@ -171,15 +171,15 @@ class Scene_4(Scene):
 
        action = raw_input("> ")
 
-       if action == "option_a":
+       if action == "run":
            print "She runs the other way to the Blue Crystal tunnel."
            return 'finalscene'
 
-       elif action == "option_b":
+       elif action == "shoot":
            print "She shoots at the Darlek but all it shoots is Blow Pops, so it\'s useless."
            return 'death'
 
-       elif action == "option_c":
+       elif action == "iPhone":
            print "She pulls out the IPhone to see if there is another path, but gets mesmerized by Candy Crush and gets exterminated."
            return 'death'
 
