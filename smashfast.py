@@ -26,10 +26,10 @@ class Engine(object):
 class Death(Scene):
 
     quips = [
-        "You died. You kinda suck at this.",
-         "Your mom would be proud...if she were smarter.",
-         "Such a loser.",
-         "I have a small puppy that's better at this."
+        "Muwwah ha ha ha!  You die!!!  Ripley will be so disappointed!!!!",
+        "Not a good choice and you're way too slow!!!  RIP Furiosa!!!",
+        "Too bad, you die!  You will make a tasty treat Zombie Bunnies!!!",
+        "Words can't describe your incompetence, so I'll just throw up and kill you!!!"
     ]
 
     def enter(self):
@@ -109,7 +109,7 @@ class Scene_3(Scene):
 
         else:
             print "DOES NOT COMPUTE!"
-            return 'scene3'      
+            return 'scene3'
 
 class Scene_4(Scene):
 
